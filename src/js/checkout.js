@@ -12,9 +12,13 @@ document.querySelector("#zip").addEventListener("blur", () => {
 });
 
 document
-  .querySelector("form[name='checkout']")
-  .addEventListener("submit", (e) => {
+  .querySelector("#checkoutSubmit").addEventListener("click", (e) => {
     e.preventDefault();
+    const myForm = document.forms[0];
+    const chk_status = myForm.checkValidity();
+    myForm.reportValidity();
+    if (chk_status)
+      myCheckout.checkout();
 
-    order.checkout();
+    // order.checkout();
   });
