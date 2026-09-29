@@ -269,6 +269,21 @@ button {
   grid-column: 3;
 }
 
+/* Start alert styles */
+
+.alert {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  border: 1px solid #8a470c;
+  background-color: #f0a868;
+}
+
+.alert span {
+  cursor: pointer;
+}
+
 @media screen and (min-width: 500px) {
   body {
     max-width: 1080px;

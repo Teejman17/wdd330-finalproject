@@ -62,3 +62,28 @@ export async function loadHeaderFooter() {
   renderWithTemplate(headerTemplate, headerElement);
   renderWithTemplate(footerTemplate, footerElement);
 }
+
+export function alertMessage(message, scroll = true) {
+  const alert = document.createElement('div');
+  alert.classList.add('alert');
+  let alertContent = '';
+  if (typeof message === 'object' && message != null) {
+    alertContent = Object.values(message).join('<br>');
+  } else {
+    alertContent = message;
+  }
+  alert.innerHTML = `<p>${alertContent}</p><span>X</span>`;
+
+  alert.addEventListener('click', function (e) {
+    if (e.target.tagName === 'SPAN') {
+      main.removeChild(this);
+    }
+  });
+
+  const main = document.querySelector("main");
+  main.prepend(alert);
+
+  if (scroll) {
+    window.scrollTo(0, 0);
+  }
+}
