@@ -11,10 +11,11 @@ function renderCartContents() {
   if (cartItems.length > 0) {
     const htmlItems = cartItems.map((item) => cartItemTemplate(item));
     document.querySelector(".product-list").innerHTML = htmlItems.join("");
- 
+
     const total = cartItems.reduce((sum, item) => sum + item.FinalPrice, 0);
 
-    document.querySelector(".cartTotal").textContent = `Total: $${total.toFixed(2)}`;
+    document.querySelector(".cartTotal").textContent =
+      `Total: $${total.toFixed(2)}`;
     document.querySelector(".cartFooter").classList.remove("hide");
   } else {
     document.querySelector(".product-list").innerHTML = "";
