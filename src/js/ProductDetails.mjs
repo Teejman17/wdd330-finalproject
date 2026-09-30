@@ -1,4 +1,4 @@
-import { getLocalStorage, setLocalStorage, alertMessage } from "./utils.mjs";
+import { getLocalStorage, setLocalStorage, alertMessage, cartIconAnimation } from "./utils.mjs";
 
 export default class ProductDetails {
 
@@ -24,7 +24,7 @@ export default class ProductDetails {
     const cartItems = getLocalStorage("customer-cart") || [];
     cartItems.push(this.product);
     setLocalStorage("customer-cart", cartItems);
-    alertMessage(`${this.product.NameWithoutBrand} added to cart!, false`);
+    cartIconAnimation();
   }
 
   renderProductDetails() {

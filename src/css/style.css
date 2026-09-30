@@ -269,6 +269,28 @@ button {
   grid-column: 3;
 }
 
+/* End cart list & styles */
+
+@keyframes cartSpin {
+  0% {
+    transform: rotate(0deg);
+  }
+  /* 50% { transform: rotate(180deg);} */
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.cart-animate-spin {
+  animation: cartSpin 0.8s ease-in-out;
+}
+
+.cartIcon {
+  display: block;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
 /* Start alert styles */
 
 .alert {
@@ -283,6 +305,8 @@ button {
 .alert span {
   cursor: pointer;
 }
+
+/* end alert styles */
 
 @media screen and (min-width: 500px) {
   body {

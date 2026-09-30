@@ -87,3 +87,14 @@ export function alertMessage(message, scroll = true) {
     window.scrollTo(0, 0);
   }
 }
+
+// const cartIcon = document.querySelector('.cartIcon');
+
+export function cartIconAnimation() {
+  const cartIcon = document.querySelector('.cartIcon');
+  if (!cartIcon) return;
+  cartIcon.classList.remove('cart-animate-spin');
+  void cartIcon.offsetWidth;
+
+  cartIcon.classList.add('cart-animate-spin');
+}
