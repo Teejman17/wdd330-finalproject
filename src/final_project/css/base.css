@@ -1,0 +1,13 @@
+:root {
+    --font-body: Lato, Helvetica, sans-serif;
+    --font-headline: Roboto, "Arial Narrow Bold", sans-serif;
+    /* colors */
+    --primary-color: #4F5D75;
+    --secondary-color: #EF8354;
+    --tertiary-color: #BFC0C0;
+
+    /* sizes */
+    --font-base: 18px;
+    --small-font: 0.8em;
+    --large-font: 1.2em;
+}
