@@ -3,30 +3,52 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Final Project</title>
-    <meta name="description" content="Page Description">
+    <title>My Final Project - A Recipe for All</title>
+    <meta name="description" content="A Recipe for All is my final project for the WDD 330 course. Using 2 API's to create an application that will be able to suggest meal options based on main ingredients">
     <meta name="author" content="TJ McCoy">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles/normalize.css">
+    <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <!-- <link rel="stylesheet" href="styles/normalize.css"> -->
     <link rel="stylesheet" href="styles/base.css">
-    <link rel="icon" href="">
+    <link rel="icon" href="favicon.icon">
     <script src="scripts/main.js" type="module"></script>
 </head>
 <body>
-    <header>
+    <header class="mainHeader">
+        <div class="logoContainer">
+            <img src="./images/recipe-for-all-logo.svg" alt="checklist with bowl of food" loading="lazy">
+            <h1>A Recipe for All</h1>
+        </div>
+        <nav class="navigation" id="navBar">
+            <div>
+                <ul>
+                    <li class="current"><a href="#" id="navHome">Home</a></li>
+                    <li><a href="#" id="navFavorites">Favorites</a></li>
+                    <li><a href="#" id="navGrocery">Grocery List</a></li>
+                </ul>
+            </div>
+            <div class="navButtons">
+                <button id="navSearch" class="search">Search</button>
+                <button id="randomButton" class="randomRecipe">Random Recipe</button>
+            </div>
+        </nav>
 
     </header>
-    <nav id="navBar" class="navigation">
-        <ul>
-            <li class="current"><a href="#"> Home</a></li>
-            <li><a href="#"> Chamber</a></li>
-            <li><a href="#"> Final</a></li>
-        </ul>
-    </nav>
-    <main>
-        
+    <main class="mainContainer">
+        <section class="searchContainer">
+            <h3>Find Your Next Meal!</h3>
+            <div class="searchBar">
+                <input type="text" id="searchInput" placeholder="Search by ingredient (e.g., pasta, chicken, beef, etc.)..."/>
+                <button id="searchButton">Search</button>
+            </div>
+        </section>
+        <section class="resultContainer">
+            <div class="recipeContainer" id="recipeContainer">
+
+            </div>
+        </section>
+    
     </main>
     <footer>
         <p>WDD330 Final Project</p>
