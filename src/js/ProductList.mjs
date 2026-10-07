@@ -21,7 +21,8 @@ export default class ProductList {
   }
 
   async init() {
-    const list = await this.dataSource.getData(this.category);
+    const data = await this.dataSource.getData(this.category);
+    const list = Array.isArray(data) ? data : (data.Result || []);
     this.renderList(list);
     document.querySelector(".titleHighlight").textContent = this.category;
   }
