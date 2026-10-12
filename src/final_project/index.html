@@ -59,11 +59,32 @@
             </div>
         </section>
 
-        <template id="recipeCardTemplate">
+        <dialog id="recipeModal" class="recipeModal">
+            <div class="modalcontainer">
+                <button id="closeModal" class="closeModal">Close</button>
+                <div id="modalDetails" class="modalDetails">
+
+                </div>
+            </div>
+        </dialog>
+
+        <template id="recipeModalTemplate" class="recipeModalTemplate">
+            <div id="modalContainerTemplate" class="modalContainerTemplate">
+                <h2 id="modalTitle" class="modalTitle"></h2>
+                <img id="modalImg" class="modalImg" src="" alt="">
+                <h3>Ingredients:</h3>
+                <ul class="modalIngredients"></ul>
+                <h3>Instructions:</h3>
+                <p class="modalInstructions"></p>
+
+            </div>
+        </template>
+
+        <template id="recipeCardTemplate" class="recipeCardTemplate">
             <article class="recipeCard">
-                <img id="recipeImg" src="" alt=" Recipe Image">
+                <img id="recipeImg" class="recipeImg" src="" alt=" Recipe Image">
                 <div class="recipeDetails">
-                    <h3 id="recipeTitle">Recipe Name: </h3>
+                    <h3 id="recipeTitle" class="recipeTitle">Recipe Name: </h3>
                     <button id=" recipeButton" class="recipeButton">View Recipe</button>
                 </div>
             </article>
