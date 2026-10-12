@@ -1,5 +1,6 @@
 import { searchByIngredient, getRandomRecipe, getRecipeDetails } from "./recipes.js";
 import { getFavorites, addIngredients, saveFavorites } from "./storage.js";
+import { displayFavorites, displayGroceryList } from "./lists.js";
 
 
 const searchInput = document.querySelector('#searchInput');
@@ -12,6 +13,8 @@ const featuredButton = document.querySelector('#featuredButton');
 const recipeModal = document.querySelector('#recipeModal')
 const closeModal = document.querySelector('#closeModal');
 const modalDetails = document.querySelector('#modalDetails');
+const navFavorites = document.querySelector('#navFavorites');
+const navGrocery = document.querySelector('#navGrocery');
 
 function displayFeaturedRecipe(recipe) {
     const featuredImg = document.querySelector('#featuredImg');
@@ -117,7 +120,7 @@ async function openRecipeModal(recipeId) {
     img.loading = 'lazy';
     title.textContent = recipe.strMeal;
     instructions.textContent = recipe.strInstructions;
-    const favoritesButton = modalCopy.querySelector('#favoritesButton');
+    const favoriteButton = modalCopy.querySelector('#favoriteButton');
     const groceryButton = modalCopy.querySelector('#groceryButton');
 
     for (let i = 1; i <= 20; i++) {
@@ -134,13 +137,13 @@ async function openRecipeModal(recipeId) {
 
     let favorites = getFavorites();
     const isFavorite = favorites.some(fav => fav.idMeal === recipe.idMeal);
-    favoritesButton.innerHTML = isFavorite ? '&hearts; Remove from Favorites' : '&hearts; Save to Favorites';
+    favoriteButton.innerHTML = isFavorite ? '&hearts; Remove from Favorites' : '&hearts; Save to Favorites';
 
-    favoritesButton.addEventListener('click', () => {
-        toggleFavorites(recipe);
+    favoriteButton.addEventListener('click', () => {
+        saveFavorites(recipe);
         const newFavorites = getFavorites();
         const favorites = newFavorites.some(fav => fav.idMeal === recipe.idMeal);
-        favoritesButton.innerHTML = favorites ? '&hearts; Remove from Favorites' : '&hearts; Save to Favorites';
+        favoriteButton.innerHTML = favorites ? '&hearts; Remove from Favorites' : '&hearts; Save to Favorites';
     });
 
     groceryButton.addEventListener('click',() => {
@@ -154,6 +157,20 @@ async function openRecipeModal(recipeId) {
 closeModal.addEventListener('click', () => {
     recipeModal.close();
 });
+
+if (navFavorites) {
+    navFavorites.addEventListener('click', (e) => {
+        e.preventDefault();
+        displayFavorites(recipeContainer);
+    });
+}
+
+if (navGrocery) {
+    navGrocery.addEventListener('click', (e) => {
+        e.preventDefault();
+        displayGroceryList(recipeContainer);
+    });
+}
 
 
 const year = document.getElementById('currentYear');
