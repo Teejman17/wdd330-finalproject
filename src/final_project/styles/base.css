@@ -230,6 +230,13 @@ h1 {
     /* overflow: hidden; */
 }
 
+.modalButtons {
+    display: flex;
+    margin: 4px;
+    gap: 10px;
+    cursor: pointer;
+}
+
 .recipeModal::backdrop {
     /* background-color: rgba(0, 0, 0, .8); */
     background-color: var(--primary-color);

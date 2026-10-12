@@ -1,4 +1,5 @@
 import { searchByIngredient, getRandomRecipe, getRecipeDetails } from "./recipes.js";
+import { getFavorites, addIngredients, saveFavorites } from "./storage.js";
 
 
 const searchInput = document.querySelector('#searchInput');
@@ -116,6 +117,8 @@ async function openRecipeModal(recipeId) {
     img.loading = 'lazy';
     title.textContent = recipe.strMeal;
     instructions.textContent = recipe.strInstructions;
+    const favoritesButton = modalCopy.querySelector('#favoritesButton');
+    const groceryButton = modalCopy.querySelector('#groceryButton');
 
     for (let i = 1; i <= 20; i++) {
         const ingredient = recipe[`strIngredient${i}`];
@@ -128,6 +131,21 @@ async function openRecipeModal(recipeId) {
             break;
         }
     }
+
+    let favorites = getFavorites();
+    const isFavorite = favorites.some(fav => fav.idMeal === recipe.idMeal);
+    favoritesButton.innerHTML = isFavorite ? '&hearts; Remove from Favorites' : '&hearts; Save to Favorites';
+
+    favoritesButton.addEventListener('click', () => {
+        toggleFavorites(recipe);
+        const newFavorites = getFavorites();
+        const favorites = newFavorites.some(fav => fav.idMeal === recipe.idMeal);
+        favoritesButton.innerHTML = favorites ? '&hearts; Remove from Favorites' : '&hearts; Save to Favorites';
+    });
+
+    groceryButton.addEventListener('click',() => {
+        addIngredients(recipe);
+    });
 
     modalDetails.appendChild(modalCopy);
     recipeModal.showModal();
