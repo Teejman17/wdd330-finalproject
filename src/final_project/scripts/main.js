@@ -17,8 +17,8 @@ function displayFeaturedRecipe(recipe) {
     const featuredTitle = document.querySelector('#featuredTitle');
     const featuredButton = document.querySelector('#featuredButton')
 
-    img.src = '';
-    img.alt = '';
+    // img.src = '';
+    // img.alt = '';
 
 }
 
@@ -30,6 +30,7 @@ function createRecipeCard(recipe) {
     const button = cardCopy.querySelector('.recipeButton');
     img.src = recipe.strMealThumb;
     img.alt = recipe.strMeal;
+    img.loading = 'lazy';
     title.textContent = recipe.strMeal;
     button.dataset.id = recipe.idMeal
 
@@ -87,9 +88,20 @@ randomButton.addEventListener('click', async () => {
 
 loadFeaturedRecipe();
 
+recipeContainer.addEventListener('click', (e) => {
+    const button = e.target.closest('.recipeButton');
+    if (button) {
+        const recipeId = button.dataset.id;
+        if (recipeId) {
+            openRecipeModal(recipeId);
+        }
+    }
+});
+
+
 async function openRecipeModal(recipeId) {
     const recipe = await getRecipeDetails(recipeId);
-    return recipe;
+    if (!recipe) return;
 
     modalDetails.innerHTML = '';
 
@@ -98,9 +110,10 @@ async function openRecipeModal(recipeId) {
     const img = modalCopy.querySelector('.modalImg');
     const title = modalCopy.querySelector('.modalTitle');
     const ingredients = modalCopy.querySelector('.modalIngredients');
-    const instructions = modalCopy.querySelector('.instructions');
+    const instructions = modalCopy.querySelector('.modalInstructions');
     img.src = recipe.strMealThumb;
     img.alt = recipe.strMeal;
+    img.loading = 'lazy';
     title.textContent = recipe.strMeal;
     instructions.textContent = recipe.strInstructions;
 
@@ -120,6 +133,9 @@ async function openRecipeModal(recipeId) {
     recipeModal.showModal();
 }
 
+closeModal.addEventListener('click', () => {
+    recipeModal.close();
+});
 
 
 const year = document.getElementById('currentYear');
