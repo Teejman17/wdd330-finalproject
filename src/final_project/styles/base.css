@@ -262,6 +262,11 @@ h1 {
     margin: 2px;
 }
 
+.modalNutritionTemplate {
+    margin: auto;
+    padding: 5px 5px 12px 5px;
+}
+
 .modalIngredients {
     margin: 12px auto;
     padding: 5px;

@@ -1,8 +1,9 @@
 import { searchByIngredient, getRandomRecipe, getRecipeDetails } from "./recipes.js";
 import { getFavorites, addIngredients, saveFavorites } from "./storage.js";
 import { displayFavorites, displayGroceryList } from "./lists.js";
+import { getRecipeNutrition } from "./nutrition.js";
 
-
+const navigation = document.querySelectorAll('nav li');
 const searchInput = document.querySelector('#searchInput');
 const searchButton = document.querySelector('#searchButton');
 const randomButton = document.querySelector('#randomButton');
@@ -15,6 +16,19 @@ const closeModal = document.querySelector('#closeModal');
 const modalDetails = document.querySelector('#modalDetails');
 const navFavorites = document.querySelector('#navFavorites');
 const navGrocery = document.querySelector('#navGrocery');
+
+navigation.forEach(link => {
+    link.addEventListener('click', (e) => {
+        e.preventDefault();
+        navigation.forEach(l => l.classList.remove('current'));
+        e.currentTarget.classList.add('current');
+
+        const favorite = link.querySelector('a');
+        if (favorite && favorite.id === 'navFavorites') {
+            displayFavorite();
+        }
+    });
+});
 
 function displayFeaturedRecipe(recipe) {
     const featuredImg = document.querySelector('#featuredImg');
@@ -64,6 +78,13 @@ async function loadFeaturedRecipe() {
         featuredButton.dataset.id = recipe.idMeal;
     }
 }
+
+featuredButton.addEventListener('click', async () => {
+    const recipe = await featuredButton.dataset.id;
+    if (recipe) {
+        openRecipeModal(recipe);
+    }
+});
 
 searchButton.addEventListener('click', async () => {
     const ingredient = searchInput.value.trim();
@@ -135,6 +156,25 @@ async function openRecipeModal(recipeId) {
         }
     }
 
+    const calories = modalCopy.querySelector('.calories');
+    const protein = modalCopy.querySelector('.protein');
+    const carbs = modalCopy.querySelector('.carbs');
+    const fat = modalCopy.querySelector('.fat');
+
+    const nutritionData = await getRecipeNutrition(recipe.strMeal);
+
+    if (nutritionData && nutritionData.calories) {
+        calories.textContent = `Calories: ${nutritionData.calories}`;
+        protein.textContent = `Protein: ${nutritionData.protein}`;
+        carbs.textContent = `Carbs: ${nutritionData.carbs}`;
+        fat.textContent = `Fat: ${nutritionData.fat}`;
+    } else {
+        calories.textContent = 'Unable to locate nutritional information.';
+        protein.textContent = '';
+        carbs.textContent = '';
+        fat.textContent = '';
+    }
+
     let favorites = getFavorites();
     const isFavorite = favorites.some(fav => fav.idMeal === recipe.idMeal);
     favoriteButton.innerHTML = isFavorite ? '&hearts; Remove from Favorites' : '&hearts; Save to Favorites';
@@ -157,6 +197,24 @@ async function openRecipeModal(recipeId) {
 closeModal.addEventListener('click', () => {
     recipeModal.close();
 });
+
+function displayFavorite() {
+    const favoriteContainer = document.querySelector('.favoritesContainer');
+    if (!favoriteContainer) return;
+
+    favoriteContainer.innerHTML = '';
+    const favorites = getFavorites();
+    
+    if (favorites.length === 0) {
+        favoriteContainer.innerHTML = 'You currently have no favorites.';
+        return;
+    }
+
+    favorites.forEach(recipe => {
+        const recipeCard = createRecipeCard(recipe);
+        favoriteContainer.appendChild(recipeCard);
+    });
+}
 
 if (navFavorites) {
     navFavorites.addEventListener('click', (e) => {

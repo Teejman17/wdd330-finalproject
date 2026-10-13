@@ -3,6 +3,10 @@ export function getFavorites() {
     return favorites ? JSON.parse(favorites) : [];
 }
 
+export function getGroceryList() {
+    return JSON.parse(localStorage.getItem('recipeGroceryList')) || [];
+}
+
 export function saveFavorites(recipe) {
     let favorites = getFavorites();
     const index = favorites.findIndex(fav => fav.idMeal === recipe.idMeal);

@@ -1,4 +1,4 @@
-import { getFavorites, addIngredients } from "./storage.js";
+import { getFavorites, addIngredients, getGroceryList} from "./storage.js";
 
 export function displayFavorites(recipeContainer) {
     const favorites = getFavorites();
@@ -11,7 +11,7 @@ export function displayFavorites(recipeContainer) {
 }
 
 export function displayGroceryList(recipeContainer) {
-    const list = addIngredients();
+    const list = getGroceryList();
     if (list.length === 0) {
         recipeContainer.innerHTML = '<h2>Grocery List</h2><p>Nothing currently in list.</p>';
         return;
