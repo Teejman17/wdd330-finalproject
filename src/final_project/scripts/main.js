@@ -50,7 +50,6 @@ function createRecipeCard(recipe) {
     img.alt = recipe.strMeal;
     img.loading = 'lazy';
     title.textContent = recipe.strMeal;
-    button.dataset.id = recipe.idMeal
 
     return cardCopy;
 }
@@ -179,14 +178,26 @@ async function openRecipeModal(recipeId) {
     const isFavorite = favorites.some(fav => fav.idMeal === recipe.idMeal);
     favoriteButton.innerHTML = isFavorite ? '&hearts; Remove from Favorites' : '&hearts; Save to Favorites';
 
-    favoriteButton.addEventListener('click', () => {
+    favoriteButton.addEventListener('click', (e) => {
+        const animation = e.currentTarget;
+        animation.classList.add('button-animate-spin');
+        setTimeout(() => {
+            animation.classList.remove('button-animate-spin');
+        }, 800);
+
         saveFavorites(recipe);
         const newFavorites = getFavorites();
         const favorites = newFavorites.some(fav => fav.idMeal === recipe.idMeal);
         favoriteButton.innerHTML = favorites ? '&hearts; Remove from Favorites' : '&hearts; Save to Favorites';
     });
 
-    groceryButton.addEventListener('click',() => {
+    groceryButton.addEventListener('click', (e) => {
+        const animation = e.currentTarget;
+        animation.classList.add('button-animate-spin');
+        setTimeout(() => {
+            animation.classList.remove('button-animate-spin');
+        }, 800);
+
         addIngredients(recipe);
     });
 

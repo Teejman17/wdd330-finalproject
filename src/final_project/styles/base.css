@@ -294,6 +294,22 @@ h1 {
     background-color: var(--primary-color);
 }
 
+@keyframes buttonSpin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    /* 50% { transform: rotate(180deg);} */
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.button-animate-spin {
+    display: inline-block;
+    animation: buttonSpin 0.8s ease-in-out;
+}
+
 footer {
     background-color: var(--primary-color);
     color: var(--accent-color);
