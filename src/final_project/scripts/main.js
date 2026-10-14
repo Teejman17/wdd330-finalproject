@@ -50,6 +50,7 @@ function createRecipeCard(recipe) {
     img.alt = recipe.strMeal;
     img.loading = 'lazy';
     title.textContent = recipe.strMeal;
+    button.dataset.id = recipe.idMeal;
 
     return cardCopy;
 }
